@@ -8,4 +8,18 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="among_us_player_red_icon_156942.png" />
+    <None Remove="octo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="among_us_player_red_icon_156942.png" />
+    <Resource Include="octo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="img\" />
+  </ItemGroup>
+
 </Project>
