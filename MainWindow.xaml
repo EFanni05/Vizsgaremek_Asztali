@@ -8,52 +8,16 @@
         Title="Vizsgaremek" Height="450" Width="800" Foreground="White" Background="#FF1C1C1C" Cursor="Arrow" Icon="/octo.png">
     <Grid Background="#FF1A1A1A">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*" />
-            <ColumnDefinition Width="7*" />
-            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="8*"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0" Background="#FF2E2E2E">
-            <Grid.RowDefinitions >
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="2*"/>
-            </Grid.RowDefinitions>
-            <Button x:Name="Post_button" Content="Button" HorizontalAlignment="Center" Height="35" Grid.Row="6" VerticalAlignment="Center" Width="135" RenderTransformOrigin="0.5,0.5" Visibility="Hidden"/>
-            <Label Content="Home" HorizontalAlignment="Left" Margin="54,0,0,0" Grid.Row="1" VerticalAlignment="Center" FontSize="20" Foreground="White" Background="Transparent"/>
-            <Label Content="Profile" HorizontalAlignment="Left" Margin="54,0,0,0" Grid.Row="2" VerticalAlignment="Center" FontSize="20" Foreground="White" Background="Transparent"/>
-            <Label Content="Search" HorizontalAlignment="Left" Margin="54,0,0,0" Grid.Row="3" VerticalAlignment="Center" FontSize="20" Foreground="White" Background="Transparent"/>
-            <Label Content="Users" HorizontalAlignment="Left" Margin="54,0,0,0" Grid.Row="4" VerticalAlignment="Center" FontSize="20" Foreground="White" Background="Transparent"/>
-            <Label Content="About us" HorizontalAlignment="Left" Margin="54,0,0,0" Grid.Row="5" VerticalAlignment="Center" FontSize="20" Foreground="White" Background="Transparent"/>
-            <Button x:Name="Login_button" Content="Button" HorizontalAlignment="Center" Height="38" Grid.Row="6" VerticalAlignment="Top" Width="135" RenderTransformOrigin="0.5,0.5" Margin="0,24,0,0"/>
-            <Label Content="Label" HorizontalAlignment="Left" Margin="92,22,0,0" VerticalAlignment="Top" Foreground="#FFFCFCFC" FontSize="20" FontWeight="Bold"/>
-            <Image HorizontalAlignment="Left" Height="64" Margin="10,10,0,0" VerticalAlignment="Top" Width="70">
-                <Image.OpacityMask>
-                    <ImageBrush ImageSource="/among_us_player_red_icon_156942.png"/>
-                </Image.OpacityMask>
-            </Image>
-        </Grid>
-        <Grid Grid.Column="1"/>
-        <Grid Grid.Column="2" Background="#FF2E2E2E">
+        <Grid Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="3*"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
-            <Label Content="Label" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFFBFBFB" FontSize="36" FontWeight="Bold"/>
-            <Label Content="Label" HorizontalAlignment="Center" Height="28" Grid.Row="1" VerticalAlignment="Center" Width="79" Foreground="White" FontSize="14"/>
-            <Label Content="Label" HorizontalAlignment="Center" Height="28" Grid.Row="2" VerticalAlignment="Center" Width="79" Foreground="White" FontSize="14"/>
-            <Label Content="Label" HorizontalAlignment="Center" Height="28" Grid.Row="4" VerticalAlignment="Center" Width="79" Foreground="White" FontSize="14"/>
-            <Label Content="Label" HorizontalAlignment="Center" Height="28" Grid.Row="5" VerticalAlignment="Center" Width="79" Foreground="White" FontSize="14"/>
-            <Label Content="Label" HorizontalAlignment="Center" Height="28" Grid.Row="3" VerticalAlignment="Center" Width="79" Foreground="White" FontSize="14"/>
-            <Button Content="supries" HorizontalAlignment="Center" Grid.Row="6" VerticalAlignment="Center" Height="40" Width="99"/>
         </Grid>
     </Grid>
 </Window>
