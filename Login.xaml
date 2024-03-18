@@ -10,8 +10,7 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
@@ -24,8 +23,9 @@
             </Grid.RowDefinitions>
             <TextBox x:Name="Email_login" HorizontalAlignment="Center" Height="22" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="140" InputScope="EmailUserName"/>
             <TextBox x:Name="Password_Login" HorizontalAlignment="Center" Height="22" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Center" Width="140" InputScope="Password"/>
-            <Label Content="Email:" HorizontalAlignment="Left" Height="34" VerticalAlignment="Center" Width="60" FontSize="16" Foreground="White" Margin="80,0,0,0" Grid.Row="1"/>
-            <Label Content="Password:" HorizontalAlignment="Left" Height="34" VerticalAlignment="Center" Width="90" FontSize="16" Foreground="White" Margin="80,0,0,0" Grid.Row="3"/>
+            <Label Content="Email:" HorizontalAlignment="Left" Height="34" VerticalAlignment="Center" Width="60" FontSize="16" Foreground="White" Margin="330,0,0,0" Grid.Row="1"/>
+            <Label Content="Password:" HorizontalAlignment="Left" Height="34" VerticalAlignment="Center" Width="90" FontSize="16" Foreground="White" Margin="330,0,0,0" Grid.Row="3"/>
+            <Button x:Name="LoginButton" Content="Button" HorizontalAlignment="Left" Margin="375,30,0,0" Grid.Row="5" VerticalAlignment="Top" Click="LoginAdmin"/>
 
         </Grid>
     </Grid>

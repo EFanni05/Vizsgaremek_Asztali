@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Vizsgaremek_Asztali"
         mc:Ignorable="d"
-        Title="Vizsgaremek" Height="450" Width="800" Foreground="White" Background="#FF1C1C1C" Cursor="Arrow" Icon="/octo.png">
+        Title="Vizsgaremek" Height="450" Width="800" Foreground="White" Background="#FF1C1C1C" Cursor="Arrow" >
     <Grid Background="#FF1A1A1A">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
@@ -30,6 +30,9 @@
             <Label Content="About us" HorizontalAlignment="Left" Margin="54,0,0,0" Grid.Row="5" VerticalAlignment="Center" FontSize="20" Foreground="White" Background="Transparent"/>
             <Button x:Name="Login_button" Content="Button" HorizontalAlignment="Center" Height="38" Grid.Row="6" VerticalAlignment="Top" Width="135" RenderTransformOrigin="0.5,0.5" Margin="0,24,0,0"/>
             <Label Content="Label" HorizontalAlignment="Left" Margin="57,0,0,0" VerticalAlignment="Center" Foreground="#FFFCFCFC" FontSize="20" FontWeight="Bold"/>
+        </Grid>
+        <Grid Grid.Column="1" >
+            
         </Grid>
     </Grid>
 </Window>
