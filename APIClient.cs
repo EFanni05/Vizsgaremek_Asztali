@@ -124,13 +124,59 @@ namespace Vizsgaremek_Asztali
             return JsonConvert.DeserializeObject<UsersResponse>(json);
         }
 
-        public UsersResponse? SearchUser(string x)
+        public UsersResponse? SearchUser(string searchString)
         {
             EnsureAuthenticated();
-            var response = client.GetAsync($"/users/search{x}").Result;
+            var response = client.GetAsync($"/users/search{searchString}").Result;
             response.EnsureSuccessStatusCode();
             var json = response.Content.ReadAsStringAsync().Result;
             return JsonConvert.DeserializeObject<UsersResponse>(json);
+        }
+
+        public RecipesResponse? SearchUser(int id)
+        {
+            EnsureAuthenticated();
+            var response = client.GetAsync($"/recipes/search-user{id}").Result;
+            response.EnsureSuccessStatusCode();
+            var json = response.Content.ReadAsStringAsync().Result;
+            return JsonConvert.DeserializeObject<RecipesResponse>(json);
+        }
+
+        public RecipesResponse? SearchById(int id)
+        {
+            EnsureAuthenticated();
+            var response = client.GetAsync($"/recipes/find{id}").Result;
+            response.EnsureSuccessStatusCode();
+            var json = response.Content.ReadAsStringAsync().Result;
+            return JsonConvert.DeserializeObject<RecipesResponse>(json);
+        }
+
+        public RecipesResponse? UpdateRecipe(Updaterecipes update)
+        {
+            EnsureAuthenticated();
+            var body = JsonContent.Create<Updaterecipes>(update);
+            var response = client.PatchAsync($"update-admin{update.Id}", body).Result;
+            response.EnsureSuccessStatusCode();
+            var json = response.Content.ReadAsStringAsync().Result;
+            return JsonConvert.DeserializeObject<RecipesResponse>(json);
+        }
+
+        public RecipesResponse? DeleteRecipe(int id)
+        {
+            EnsureAuthenticated();
+            var response = client.DeleteAsync($"delete-admin{id}").Result;
+            response.EnsureSuccessStatusCode();
+            var json = response.Content.ReadAsStringAsync().Result;
+            return JsonConvert.DeserializeObject<RecipesResponse>(json);
+        }
+
+        public RatingResponse? GetAll()
+        {
+            EnsureAuthenticated();
+            var response = client.GetAsync("").Result;
+            response.EnsureSuccessStatusCode();
+            var json = response.Content.ReadAsStringAsync().Result;
+            return JsonConvert.DeserializeObject<RatingResponse>(json);
         }
 
         private void EnsureAuthenticated()
