@@ -5,19 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Vizsgaremek_Asztali"
         mc:Ignorable="d"
-        Title="Vizsgaremek" Height="450" Width="800" Foreground="White" Background="#FF1C1C1C" Cursor="Arrow" Icon="/octo.png">
+        Title="Vizsgaremek" Height="450" Width="800" Foreground="White" Background="#FF1C1C1C" Cursor="Arrow" >
     <Grid Background="#FF1A1A1A">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="7*" />
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
+        <Grid Grid.Column="0" Background="#FF2E2E2E">
+            <Grid.RowDefinitions >
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
+            <Button x:Name="Post_button" Content="Button" HorizontalAlignment="Center" Height="35" Grid.Row="6" VerticalAlignment="Center" Width="135" RenderTransformOrigin="0.5,0.5" Visibility="Hidden"/>
+            <Label Content="Home" HorizontalAlignment="Left" Margin="54,0,0,0" Grid.Row="1" VerticalAlignment="Center" FontSize="20" Foreground="White" Background="Transparent"/>
+            <Label Content="Profile" HorizontalAlignment="Left" Margin="54,0,0,0" Grid.Row="2" VerticalAlignment="Center" FontSize="20" Foreground="White" Background="Transparent"/>
+            <Label Content="Search" HorizontalAlignment="Left" Margin="54,0,0,0" Grid.Row="3" VerticalAlignment="Center" FontSize="20" Foreground="White" Background="Transparent"/>
+            <Label Content="Users" HorizontalAlignment="Left" Margin="54,0,0,0" Grid.Row="4" VerticalAlignment="Center" FontSize="20" Foreground="White" Background="Transparent"/>
+            <Label Content="About us" HorizontalAlignment="Left" Margin="54,0,0,0" Grid.Row="5" VerticalAlignment="Center" FontSize="20" Foreground="White" Background="Transparent"/>
+            <Button x:Name="Login_button" Content="Button" HorizontalAlignment="Center" Height="38" Grid.Row="6" VerticalAlignment="Top" Width="135" RenderTransformOrigin="0.5,0.5" Margin="0,24,0,0"/>
+            <Label Content="Label" HorizontalAlignment="Left" Margin="57,0,0,0" VerticalAlignment="Center" Foreground="#FFFCFCFC" FontSize="20" FontWeight="Bold"/>
+        </Grid>
+        <Grid Grid.Column="1" >
         </Grid>
     </Grid>
 </Window>
