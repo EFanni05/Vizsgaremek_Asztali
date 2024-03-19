@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Reflection;
 using System.Text;
@@ -43,18 +44,33 @@ namespace Vizsgaremek_Asztali
             }
         }
 
+        class UserRoleUpdate
+        {
+            [JsonProperty("id")]
+            public int Id { get; set; }
+
+            [JsonProperty("role")]
+            public string UserRole { get; set; }
+            public UserRoleUpdate(int id, string userRole)
+            {
+                Id = id;
+                UserRole = userRole;
+            }
+
+        }
+
         class LoginResponse
         {
             [JsonProperty("token")]
             public string? AuthToken { get; set; }
         }
 
-        private static HttpClient client = new HttpClient();
+        private static HttpClient _client = new HttpClient();
         
         public APIClient(string baseAddress) 
         {
-            client.BaseAddress = new Uri(baseAddress);
-            client.DefaultRequestHeaders.Accept.ParseAdd("application/json");
+            _client.BaseAddress = new Uri(baseAddress);
+            _client.DefaultRequestHeaders.Accept.ParseAdd("application/json");
         }
 
 
@@ -62,7 +78,7 @@ namespace Vizsgaremek_Asztali
         {
             LogOut();
             var body = JsonContent.Create<LoginRequest>(new LoginRequest(email, password));
-            var response = client.PostAsync("/auth/login", body).Result;
+            var response = _client.PostAsync("/auth/login", body).Result;
             response.EnsureSuccessStatusCode();
             var json = response.Content.ReadAsStringAsync().Result;
             var result = JsonConvert.DeserializeObject<LoginResponse>(json);
@@ -81,7 +97,7 @@ namespace Vizsgaremek_Asztali
         public MeResponse? Me()
         {
             EnsureAuthenticated();
-            var response = client.GetAsync("/users/me").Result;
+            var response = _client.GetAsync("/users/me").Result;
             response.EnsureSuccessStatusCode();
             var json = response.Content.ReadAsStringAsync().Result;
             return JsonConvert.DeserializeObject<MeResponse>(json);
@@ -90,7 +106,7 @@ namespace Vizsgaremek_Asztali
         public UsersResponse? GetAllUsers()
         {
             EnsureAuthenticated();
-            var response = client.GetAsync("/users/all").Result;
+            var response = _client.GetAsync("/users/all").Result;
             response.EnsureSuccessStatusCode();
             var json = response.Content.ReadAsStringAsync().Result;
             return JsonConvert.DeserializeObject<UsersResponse>(json);
@@ -99,7 +115,7 @@ namespace Vizsgaremek_Asztali
         public UsersResponse? GetUser(int id)
         {
             EnsureAuthenticated();
-            var response = client.GetAsync($"/users/find{id}").Result;
+            var response = _client.GetAsync($"/users/find{id}").Result;
             response.EnsureSuccessStatusCode();
             var json = response.Content.ReadAsStringAsync().Result;
             return JsonConvert.DeserializeObject<UsersResponse>(json);
@@ -108,7 +124,7 @@ namespace Vizsgaremek_Asztali
         public UsersResponse? DeleteUser(int id)
         {
             EnsureAuthenticated();
-            var response = client.DeleteAsync($"/users/delete{id}").Result;
+            var response = _client.DeleteAsync($"/users/delete{id}").Result;
             response.EnsureSuccessStatusCode();
             var json = response.Content.ReadAsStringAsync().Result;
             return JsonConvert.DeserializeObject<UsersResponse>(json);
@@ -118,7 +134,17 @@ namespace Vizsgaremek_Asztali
         {
             EnsureAuthenticated();
             var body = JsonContent.Create<UpdateUserResponse>(update);
-            var response = client.PatchAsync("/users/update", body).Result;
+            var response = _client.PatchAsync("/users/update", body).Result;
+            response.EnsureSuccessStatusCode();
+            var json = response.Content.ReadAsStringAsync().Result;
+            return JsonConvert.DeserializeObject<UsersResponse>(json);
+        }
+
+        public UsersResponse? UpdateRoleUser(int id, string roleName)
+        {
+            EnsureAuthenticated();
+            var body = JsonContent.Create<UserRoleUpdate>(new UserRoleUpdate(id, roleName));
+            var response = _client.PatchAsync($"/users/update:admin{id}", body).Result;
             response.EnsureSuccessStatusCode();
             var json = response.Content.ReadAsStringAsync().Result;
             return JsonConvert.DeserializeObject<UsersResponse>(json);
@@ -127,7 +153,7 @@ namespace Vizsgaremek_Asztali
         public UsersResponse? SearchUser(string searchString)
         {
             EnsureAuthenticated();
-            var response = client.GetAsync($"/users/search{searchString}").Result;
+            var response = _client.GetAsync($"/users/search{searchString}").Result;
             response.EnsureSuccessStatusCode();
             var json = response.Content.ReadAsStringAsync().Result;
             return JsonConvert.DeserializeObject<UsersResponse>(json);
@@ -136,7 +162,7 @@ namespace Vizsgaremek_Asztali
         public RecipesResponse? SearchUser(int id)
         {
             EnsureAuthenticated();
-            var response = client.GetAsync($"/recipes/search-user{id}").Result;
+            var response = _client.GetAsync($"/recipes/search-user{id}").Result;
             response.EnsureSuccessStatusCode();
             var json = response.Content.ReadAsStringAsync().Result;
             return JsonConvert.DeserializeObject<RecipesResponse>(json);
@@ -145,7 +171,7 @@ namespace Vizsgaremek_Asztali
         public RecipesResponse? SearchById(int id)
         {
             EnsureAuthenticated();
-            var response = client.GetAsync($"/recipes/find{id}").Result;
+            var response = _client.GetAsync($"/recipes/find{id}").Result;
             response.EnsureSuccessStatusCode();
             var json = response.Content.ReadAsStringAsync().Result;
             return JsonConvert.DeserializeObject<RecipesResponse>(json);
@@ -155,7 +181,7 @@ namespace Vizsgaremek_Asztali
         {
             EnsureAuthenticated();
             var body = JsonContent.Create<Updaterecipes>(update);
-            var response = client.PatchAsync($"update-admin{update.Id}", body).Result;
+            var response = _client.PatchAsync($"/recipes/update{update.Id}", body).Result;
             response.EnsureSuccessStatusCode();
             var json = response.Content.ReadAsStringAsync().Result;
             return JsonConvert.DeserializeObject<RecipesResponse>(json);
@@ -164,19 +190,56 @@ namespace Vizsgaremek_Asztali
         public RecipesResponse? DeleteRecipe(int id)
         {
             EnsureAuthenticated();
-            var response = client.DeleteAsync($"delete-admin{id}").Result;
+            var response = _client.DeleteAsync($"/recipes/delete-admin{id}").Result;
             response.EnsureSuccessStatusCode();
             var json = response.Content.ReadAsStringAsync().Result;
             return JsonConvert.DeserializeObject<RecipesResponse>(json);
         }
 
-        public RatingResponse? GetAll()
+        public RatingResponse? GetAllRating()
         {
             EnsureAuthenticated();
-            var response = client.GetAsync("").Result;
+            var response = _client.GetAsync("/ratings/getAll").Result;
             response.EnsureSuccessStatusCode();
             var json = response.Content.ReadAsStringAsync().Result;
             return JsonConvert.DeserializeObject<RatingResponse>(json);
+        }
+
+        public RatingResponse? GetRating(int id)
+        {
+            EnsureAuthenticated();
+            var response = _client.GetAsync($"/ratings/find{id}").Result;
+            response.EnsureSuccessStatusCode();
+            var json = response.Content.ReadAsStringAsync().Result;
+            return JsonConvert.DeserializeObject<RatingResponse>(json);
+        }
+
+        public RatingResponse? UpdateRating(UpdateRating update)
+        {
+            EnsureAuthenticated();
+            var body = JsonContent.Create<UpdateRating>(update);
+            var response = _client.PatchAsync($"/ratings/updateAdmin{update.Id}", body).Result;
+            response.EnsureSuccessStatusCode();
+            var json = response.Content.ReadAsStringAsync().Result;
+            return JsonConvert.DeserializeObject<RatingResponse>(json);
+        }
+
+        public RatingResponse? DeleteRating(int id)
+        {
+            EnsureAuthenticated();
+            var response = _client.DeleteAsync($"/ratings/deleteadmin{id}").Result;
+            response.EnsureSuccessStatusCode();
+            var json = response.Content.ReadAsStringAsync().Result;
+            return JsonConvert.DeserializeObject<RatingResponse>(json);
+        }
+
+        public string? GetAllergensForRecipe(int id)
+        {
+            EnsureAuthenticated();
+            var response = _client.GetAsync($"/allergens/find-recipe{id}").Result;
+            response.EnsureSuccessStatusCode();
+            var json = response.Content.ReadAsStringAsync();
+            return JsonConvert.SerializeObject(json);
         }
 
         private void EnsureAuthenticated()
@@ -186,7 +249,7 @@ namespace Vizsgaremek_Asztali
                 Properties.Settings.Default.AuthToken = null;
                 throw new Exception("You are not authenticated!\nPlease log in");
             }
-            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Properties.Settings.Default.AuthToken);
+            _client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Properties.Settings.Default.AuthToken);
         }
 
         private bool IsAuthenticated()
