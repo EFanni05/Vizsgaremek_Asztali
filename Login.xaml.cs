@@ -57,6 +57,7 @@ namespace Vizsgaremek_Asztali
             {
                 MessageBox.Show(ex.Message);
             }
+            
         }
     }
 }

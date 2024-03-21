@@ -21,16 +21,16 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
-            <Button x:Name="Post_button" Content="Button" HorizontalAlignment="Center" Height="35" Grid.Row="6" VerticalAlignment="Center" Width="135" RenderTransformOrigin="0.5,0.5" Visibility="Hidden"/>
-            <Label Content="Home" HorizontalAlignment="Left" Margin="54,0,0,0" Grid.Row="1" VerticalAlignment="Center" FontSize="20" Foreground="White" Background="Transparent"/>
-            <Label Content="Profile" HorizontalAlignment="Left" Margin="54,0,0,0" Grid.Row="2" VerticalAlignment="Center" FontSize="20" Foreground="White" Background="Transparent"/>
-            <Label Content="Search" HorizontalAlignment="Left" Margin="54,0,0,0" Grid.Row="3" VerticalAlignment="Center" FontSize="20" Foreground="White" Background="Transparent"/>
-            <Label Content="Users" HorizontalAlignment="Left" Margin="54,0,0,0" Grid.Row="4" VerticalAlignment="Center" FontSize="20" Foreground="White" Background="Transparent"/>
-            <Label Content="About us" HorizontalAlignment="Left" Margin="54,0,0,0" Grid.Row="5" VerticalAlignment="Center" FontSize="20" Foreground="White" Background="Transparent"/>
-            <Button x:Name="Login_button" Content="Button" HorizontalAlignment="Center" Height="38" Grid.Row="6" VerticalAlignment="Top" Width="135" RenderTransformOrigin="0.5,0.5" Margin="0,24,0,0"/>
-            <Label Content="Label" HorizontalAlignment="Left" Margin="57,0,0,0" VerticalAlignment="Center" Foreground="#FFFCFCFC" FontSize="20" FontWeight="Bold"/>
+            <Label x:Name="Home_label" Content="Home" HorizontalAlignment="Left" Margin="54,0,0,0" Grid.Row="1" VerticalAlignment="Center" FontSize="20" Foreground="White" Background="Transparent"/>
+            <Label x:Name="Profile_label" Content="Profile" HorizontalAlignment="Left" Margin="54,0,0,0" Grid.Row="2" VerticalAlignment="Center" FontSize="20" Foreground="White" Background="Transparent"/>
+            <Label x:Name="search_label" Content="Search" HorizontalAlignment="Left" Margin="54,0,0,0" Grid.Row="3" VerticalAlignment="Center" FontSize="20" Foreground="White" Background="Transparent"/>
+            <Label Content="Ratings" HorizontalAlignment="Left" Margin="54,0,0,0" Grid.Row="4" VerticalAlignment="Center" FontSize="20" Foreground="White" Background="Transparent"/>
+            <Label x:Name="About_label" Content="About us" HorizontalAlignment="Left" Margin="47,2,0,0" Grid.Row="5" VerticalAlignment="Top" FontSize="20" Foreground="White" Background="Transparent"/>
+            <Button x:Name="Login_button" Content="Logout" HorizontalAlignment="Center" Height="38" Grid.Row="6" VerticalAlignment="Top" Width="135" RenderTransformOrigin="0.5,0.5" Margin="0,24,0,0" IsEnabled="False"/>
+            <Label Content="Admin panel" HorizontalAlignment="Left" Margin="21,0,0,0" VerticalAlignment="Center" Foreground="#FFFCFCFC" FontSize="20" FontWeight="Bold"/>
         </Grid>
         <Grid Grid.Column="1" >
+            <Frame x:Name="FrameForPages" Content="Frame" HorizontalAlignment="Center" Height="414" VerticalAlignment="Center" Width="602" Source="/Login.xaml"/>
         </Grid>
     </Grid>
 </Window>
