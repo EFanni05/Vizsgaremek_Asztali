@@ -11,6 +11,7 @@
     <Grid Width="602" Height="414" Margin="99,18,99,18">
         <DataGrid x:Name="RatingDataGrid" HorizontalAlignment="Center" Height="394" VerticalAlignment="Center" Width="582" Background="{x:Null}">
             <DataGrid.Columns>
+                <DataGridTextColumn Header="Id"/>
                 <DataGridTextColumn Header="Posted"/>
                 <DataGridTextColumn Header="User"/>
                 <DataGridTextColumn Header="Rating"/>

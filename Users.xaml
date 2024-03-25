@@ -10,10 +10,11 @@
 
     <Grid Width="602" Height="414">
         <TextBox x:Name="Searchbox" HorizontalAlignment="Left" Height="25" Margin="121,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="381" Foreground="Black"/>
-        <Button Content="Search" HorizontalAlignment="Left" Height="25" Margin="507,22,0,0" VerticalAlignment="Top" Width="85"/>
+        <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" Height="25" Margin="507,22,0,0" VerticalAlignment="Top" Width="85" Click="SearchUser"/>
         <Label Content="Search for users: " HorizontalAlignment="Left" Margin="6,22,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14" Height="25"/>
-        <DataGrid HorizontalAlignment="Center" Height="337" Margin="0,67,0,0" VerticalAlignment="Top" Width="582" Background="{x:Null}">
+        <DataGrid x:Name="UsersDataGrid" HorizontalAlignment="Center" Height="337" Margin="0,67,0,0" VerticalAlignment="Top" Width="582" Background="{x:Null}">
             <DataGrid.Columns>
+                <DataGridTextColumn Header="Id"/>
                 <DataGridTextColumn Header="Username"/>
                 <DataGridTextColumn Header="Email"/>
                 <DataGridTextColumn Header="Role"/>
@@ -21,9 +22,9 @@
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <Button x:Name="View" Content="Change Role"/>
-                            <Button x:Name="Update" Content="Update"/>
-                            <Button x:Name="Delete" Content="Delete"/>
+                            <Button x:Name="View" Content="Change Role" Click="ChangeRole"/>
+                            <Button x:Name="Update" Content="Update" Click="UpdateUser"/>
+                            <Button x:Name="Delete" Content="Delete" Click="DeleteUser"/>
                         </StackPanel>
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>

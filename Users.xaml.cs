@@ -23,6 +23,37 @@ namespace Vizsgaremek_Asztali
         public Users()
         {
             InitializeComponent();
+            UsersDataGrid.Items.Add(App.CurrentApp.APIClient.GetAllUsers());
+        }
+
+        private void ChangeRole(object sender, RoutedEventArgs e)
+        {
+            //TODO: uri change fo the frame
+        }
+
+        private void UpdateUser(object sender, RoutedEventArgs e)
+        {
+            //TODO: uri change fo the frame
+        }
+
+        private void DeleteUser(object sender, RoutedEventArgs e)
+        {
+            UsersResponse user = UsersDataGrid.SelectedItem;
+            App.CurrentApp.APIClient.DeleteUser(user.Id);
+        }
+
+        private void SearchUser(object sender, RoutedEventArgs e)
+        {
+            string search = Searchbox.Text;
+            try
+            {
+                List<UsersResponse> users = App.CurrentApp.APIClient.SearchUser(search);
+                UsersDataGrid.Items.Add(users); //minus the id
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

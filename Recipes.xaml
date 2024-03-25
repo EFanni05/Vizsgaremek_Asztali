@@ -11,6 +11,7 @@
     <Grid Width="602" Height="414">
         <DataGrid x:Name="RecipesDataGrid" HorizontalAlignment="Center" Height="394" VerticalAlignment="Top" Width="582" Background="{x:Null}">
             <DataGrid.Columns>
+                <DataGridTextColumn Header="Id"/>
                 <DataGridTextColumn Header="Posted"/>
                 <DataGridTextColumn Header="User"/>
                 <DataGridTextColumn Header="Title"/>

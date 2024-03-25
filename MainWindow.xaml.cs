@@ -20,5 +20,35 @@ namespace Vizsgaremek_Asztali
         {
             InitializeComponent();
         }
+
+        private void Logout(object sender, RoutedEventArgs e)
+        {
+            App.CurrentApp.APIClient.LogOut();
+        }
+
+        private void MyPage(object sender, RoutedEventArgs e)
+        {
+            FrameForPages.Source = new Uri("MyPage.xaml");
+        }
+
+        private void Recipes(object sender, RoutedEventArgs e)
+        {
+            FrameForPages.Source = new Uri("Recipes.xaml");
+        }
+
+        private void Ratings(object sender, RoutedEventArgs e)
+        {
+            FrameForPages.Source = new Uri("Rating.xaml");
+        }
+
+        private void Users(object sender, RoutedEventArgs e)
+        {
+            FrameForPages.Source = new Uri("Users.xaml");
+        }
+
+        private void AboutPopup(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Made by Elekes Fanni 14.S");
+        }
     }
 }
