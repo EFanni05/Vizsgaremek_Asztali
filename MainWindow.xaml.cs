@@ -19,6 +19,57 @@ namespace Vizsgaremek_Asztali
         public MainWindow()
         {
             InitializeComponent();
+            OnAuthenticatedChange(false);
+        }
+
+        public void OnAuthenticatedChange(bool authenticated)
+        {
+            var visibility = authenticated ? Visibility.Visible: Visibility.Hidden;
+            HomeButton.Visibility = visibility;
+            RecipesButton.Visibility = visibility;
+            RatingsButton.Visibility = visibility;
+            UsersButton.Visibility = visibility;
+            AboutUsButton.Visibility = visibility;
+            LogoutButton.Visibility = visibility;
+            if (authenticated) 
+            {
+                FrameForPages.Navigate(new Uri("MyPage.xaml", UriKind.Relative));
+            }
+            else 
+            {
+                FrameForPages.Navigate(new Uri("Login.xaml", UriKind.Relative));
+            }
+        }
+
+        private void Logout(object sender, RoutedEventArgs e)
+        {
+            App.CurrentApp.APIClient.LogOut();
+            OnAuthenticatedChange(false);
+        }
+
+        private void MyPage(object sender, RoutedEventArgs e)
+        {
+            FrameForPages.Navigate(new Uri("MyPage.xaml", UriKind.Relative));
+        }
+
+        private void Recipes(object sender, RoutedEventArgs e)
+        {
+            FrameForPages.Navigate(new Uri("Recipes.xaml", UriKind.Relative));
+        }
+
+        private void Ratings(object sender, RoutedEventArgs e)
+        {
+            FrameForPages.Navigate(new Uri("Ratings.xaml", UriKind.Relative));
+        }
+
+        private void Users(object sender, RoutedEventArgs e)
+        {
+            FrameForPages.Navigate(new Uri("Users.xaml", UriKind.Relative));
+        }
+
+        private void AboutPopup(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Made by Elekes Fanni 14.S");
         }
     }
 }

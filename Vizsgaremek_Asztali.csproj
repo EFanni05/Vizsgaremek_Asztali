@@ -9,8 +9,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="1.png" />
+    <None Remove="2.png" />
+    <None Remove="5.png" />
+    <None Remove="7.png" />
+    <None Remove="8.png" />
+    <None Remove="CookingMama.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="1.png" />
+    <Resource Include="2.png" />
+    <Resource Include="5.png" />
+    <Resource Include="7.png" />
+    <Resource Include="8.png" />
+    <Resource Include="CookingMama.png" />
   </ItemGroup>
 
   <ItemGroup>

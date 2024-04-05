@@ -17,5 +17,8 @@ namespace Vizsgaremek_Asztali
 
         [JsonProperty("role")]
         public string? Role { get; set; }
+        
+        [JsonProperty("id")]
+        public int Id { get; set; }
     }
 }

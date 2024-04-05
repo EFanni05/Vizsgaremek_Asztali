@@ -30,5 +30,7 @@ namespace Vizsgaremek_Asztali
         [JsonProperty("user_id")]
         public int UserId { get; set; }
 
+        [JsonProperty("username")]
+        public string Username { get; set; }
     }
 }

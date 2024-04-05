@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace Vizsgaremek_Asztali
 {
-    class Allergens
+    public class UnauthenticatedException : Exception
     {
-        private int id;
-        private string name;
+        public UnauthenticatedException()
+        {
+            
+        }
     }
 }
