@@ -6,16 +6,16 @@
       xmlns:local="clr-namespace:Vizsgaremek_Asztali"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Recipes">
+      Title="Recipes" Loaded="OnLoaded">
 
     <Grid Width="602" Height="414">
-        <DataGrid x:Name="RecipesDataGrid" HorizontalAlignment="Center" Height="394" VerticalAlignment="Top" Width="582" Background="{x:Null}">
+        <DataGrid x:Name="RecipesDataGrid" HorizontalAlignment="Center" Height="394" VerticalAlignment="Top" Width="582" Background="{x:Null}" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id"/>
-                <DataGridTextColumn Header="Posted"/>
-                <DataGridTextColumn Header="User"/>
-                <DataGridTextColumn Header="Title"/>
-                <DataGridTextColumn Header="Description"/>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Visibility="Hidden"/>
+                <DataGridTextColumn Header="Posted" Binding="{Binding Posted}"/>
+                <DataGridTextColumn Header="User" Binding="{Binding User}"/>
+                <DataGridTextColumn Header="Title" Binding="{Binding Title}"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
                 <DataGridTemplateColumn Header="Moderating">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +25,42 @@ namespace Vizsgaremek_Asztali
         public Recipes()
         {
             InitializeComponent();
+        }
+
+        public class DataItem
+        {
+            public int Id { get; set; }
+            public string Posted { get; set; }
+            public int User { get; set; }
+            public string Title { get; set; }
+            public string Description { get; set; }
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var recipes = App.CurrentApp.APIClient.GetAllRecipes();
+                if(recipes == null || recipes.Count == 0)
+                {
+                    throw new Exception("something gone wrong!");
+                }
+                else
+                {
+                    RecipesDataGrid.ItemsSource = recipes.Select(r => new DataItem
+                    {
+                        Id = r.Id,
+                        Posted = r.Posted,
+                        User = r.UserId,
+                        Title = r.Title,
+                        Description = r.Description
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

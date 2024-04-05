@@ -25,20 +25,24 @@ namespace Vizsgaremek_Asztali
     /// </summary>
     public partial class Login : Page
     {
-        private readonly Regex regexEmail = new Regex(@"/^[a-zA-Z0-9.!#$%&’*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/", RegexOptions.Compiled);
+        private readonly Regex regexEmail = new Regex(@"^[a-zA-Z0-9.!#$%&’*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$", RegexOptions.Compiled);
         private readonly Regex regexPassword = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$", RegexOptions.Compiled);
 
         public Login()
         {
             InitializeComponent();
+            //TODO:remove this!!
+            Email_login.Text = "manager@example.com";
+            Password_Login.Password = "Admin123";
         }
 
         private void LoginAdmin(object sender, RoutedEventArgs e)
         {
+            var mainWindow = (MainWindow)Application.Current.MainWindow;
             try
             {
                 string email = Email_login.Text;
-                string password = Password_Login.Text;
+                string password = Password_Login.Password;
                 if (email == null || password == null)
                 {
                     throw new Exception("Email or Password is emty!");
@@ -52,12 +56,13 @@ namespace Vizsgaremek_Asztali
                     throw new Exception("Password is not vaild");
                 }
                 App.CurrentApp.APIClient.Login(email, password);
+                mainWindow.OnAuthenticatedChange(true);
             }
             catch (Exception ex)
             {
+                mainWindow.OnAuthenticatedChange(false);
                 MessageBox.Show(ex.Message);
             }
-            
         }
     }
 }

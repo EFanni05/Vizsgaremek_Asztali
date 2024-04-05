@@ -23,37 +23,60 @@ namespace Vizsgaremek_Asztali
         public Users()
         {
             InitializeComponent();
-            UsersDataGrid.Items.Add(App.CurrentApp.APIClient.GetAllUsers());
+        }
+
+        public class DataItem
+        {
+            public int Id { get; set; }
+            public string Username { get; set; }
+            public string Email { get; set; }
+            public string Role { get; set; }
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var users = App.CurrentApp.APIClient.GetAllUsers();
+                if (users == null || users.Count == 0)
+                {
+                    throw new Exception("something gone wrong!");
+                }
+                else
+                {
+                    UsersDataGrid.ItemsSource = users.Select(r => new DataItem
+                    {
+                        Id = r.Id,
+                        Username = r.Name,
+                        Email = r.Email,
+                        Role = r.Role
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void ChangeRole(object sender, RoutedEventArgs e)
         {
-            //TODO: uri change fo the frame
+
         }
 
         private void UpdateUser(object sender, RoutedEventArgs e)
         {
-            //TODO: uri change fo the frame
+            
         }
 
         private void DeleteUser(object sender, RoutedEventArgs e)
         {
-            UsersResponse user = UsersDataGrid.SelectedItem;
-            App.CurrentApp.APIClient.DeleteUser(user.Id);
+            
         }
 
         private void SearchUser(object sender, RoutedEventArgs e)
         {
-            string search = Searchbox.Text;
-            try
-            {
-                List<UsersResponse> users = App.CurrentApp.APIClient.SearchUser(search);
-                UsersDataGrid.Items.Add(users); //minus the id
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            
         }
     }
 }

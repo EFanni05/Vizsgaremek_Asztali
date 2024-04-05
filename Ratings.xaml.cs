@@ -23,25 +23,19 @@ namespace Vizsgaremek_Asztali
         public Ratings()
         {
             InitializeComponent();
-            var response = App.CurrentApp.APIClient.GetAllRating();
-            if (response != null )
-            {
-                List<RatingResponse> ratingsWithId = response;
-                List<RatingDisplay> displayList = new List<RatingDisplay>();
-                UsersResponse user;
-                for ( int i = 0; i < ratingsWithId.Count; i++ )
-                {
-                    try
-                    {
-                        user = App.CurrentApp.APIClient.GetUser(ratingsWithId[i].UserId);
-                        displayList.Add(new RatingDisplay(ratingsWithId[i].Id, ratingsWithId[i].Content, ratingsWithId[i].Posted, ratingsWithId[i].Rating, ratingsWithId[i].RecipeId, user.Name));
-                    }catch ( Exception e )
-                    {
-                        Console.WriteLine( e.ToString() );
-                    }
-                }
-                RatingDataGrid.Items.Add(displayList);
-            }
+        }
+
+        public class DataItem
+        {
+            public int Id { get; set; }
+            public string Username { get; set; }
+            public int Rating { get; set; }
+            public string Content { get; set; }
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

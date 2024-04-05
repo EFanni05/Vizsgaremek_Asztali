@@ -9,11 +9,9 @@
       Title="UpdateUser">
 
     <Grid Width="602" Height="414" Margin="99,18,99,18">
-        <TextBox HorizontalAlignment="Left" Height="20" Margin="41,57,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="170"/>
-        <TextBox HorizontalAlignment="Left" Height="20" Margin="41,122,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="170"/>
-        <TextBox HorizontalAlignment="Left" Height="20" Margin="41,282,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="170"/>
-        <TextBox HorizontalAlignment="Left" Height="20" Margin="41,347,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="170"/>
-        <TextBox HorizontalAlignment="Left" Height="20" Margin="41,282,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="170"/>
-        
+        <TextBox HorizontalAlignment="Left" Height="40" Margin="51,117,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="190"/>
+        <TextBox HorizontalAlignment="Left" Height="40" Margin="51,237,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="190"/>
+        <TextBox HorizontalAlignment="Left" Height="40" Margin="326,117,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="190"/>
+
     </Grid>
 </Page>

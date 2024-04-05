@@ -21,16 +21,16 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
-            <Button x:Name="Login_button" Content="Logout" HorizontalAlignment="Center" Height="38" Grid.Row="6" VerticalAlignment="Top" Width="135" RenderTransformOrigin="0.5,0.5" Margin="0,24,0,0" Background="#FF78648E" BorderBrush="#FF151212" Foreground="White" FontSize="16" FontWeight="Bold" Click="Logout"/>
-            <Label Content="Admin panel" HorizontalAlignment="Left" Margin="21,0,0,0" VerticalAlignment="Center" Foreground="#FFFCFCFC" FontSize="20" FontWeight="Bold"/>
-            <Button x:Name="Home" Content="Home" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Width="73" Height="28" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="#FFF7F7F7" FontSize="16" FontWeight="Bold" Click="MyPage"/>
+            <Button x:Name="LogoutButton" Content="Logout" HorizontalAlignment="Center" Height="38" Grid.Row="6" VerticalAlignment="Top" Width="135" RenderTransformOrigin="0.5,0.5" Margin="0,24,0,0" Background="#FF78648E" BorderBrush="#FF151212" Foreground="White" FontSize="16" FontWeight="Bold" Click="Logout"/>
+            <Label Content="Admin control" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFFCFCFC" FontSize="20" FontWeight="Bold"/>
+            <Button x:Name="HomeButton" Content="Home" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Width="73" Height="28" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="#FFF7F7F7" FontSize="16" FontWeight="Bold" Click="MyPage"/>
             <Button x:Name="RecipesButton" Content="Recipes" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Width="73" Height="28" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFF9F9F9" FontSize="16" FontWeight="Bold" Click="Recipes"/>
-            <Button x:Name="RatingsBurron" Content="Ratings" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center" Width="73" Height="28" Foreground="#FFFDFDFD" BorderBrush="{x:Null}" Background="{x:Null}" FontSize="16" FontWeight="Bold" Click="Ratings"/>
+            <Button x:Name="RatingsButton" Content="Ratings" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center" Width="73" Height="28" Foreground="#FFFDFDFD" BorderBrush="{x:Null}" Background="{x:Null}" FontSize="16" FontWeight="Bold" Click="Ratings"/>
             <Button x:Name="UsersButton" Content="Users" HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Center" Width="73" Height="28" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="16" FontWeight="Bold" Click="Users"/>
-            <Button x:Name="AboutUs" Content="About us" HorizontalAlignment="Center" Grid.Row="5" VerticalAlignment="Center" Width="73" Height="28" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="16" FontWeight="Bold" Click="AboutPopup"/>
+            <Button x:Name="AboutUsButton" Content="About us" HorizontalAlignment="Center" Grid.Row="5" VerticalAlignment="Center" Width="73" Height="28" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="16" FontWeight="Bold" Click="AboutPopup"/>
         </Grid>
         <Grid Grid.Column="1" >
-            <Frame x:Name="FrameForPages" Content="Frame" HorizontalAlignment="Center" Height="414" VerticalAlignment="Center" Width="602" Source="/Login.xaml"/>
+            <Frame x:Name="FrameForPages" Content="Frame" HorizontalAlignment="Center" Height="414" VerticalAlignment="Center" Width="602" Source="/Login.xaml" NavigationUIVisibility="Hidden"/>
         </Grid>
     </Grid>
 </Window>

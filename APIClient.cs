@@ -11,6 +11,7 @@ using System.Net.Http.Json;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Vizsgaremek_Asztali
 {
@@ -103,13 +104,13 @@ namespace Vizsgaremek_Asztali
             return JsonConvert.DeserializeObject<MeResponse>(json);
         }
 
-        public UsersResponse? GetAllUsers()
+        public IList<UsersResponse>? GetAllUsers()
         {
             EnsureAuthenticated();
             var response = _client.GetAsync("/users/all").Result;
             response.EnsureSuccessStatusCode();
             var json = response.Content.ReadAsStringAsync().Result;
-            return JsonConvert.DeserializeObject<UsersResponse>(json);
+            return JsonConvert.DeserializeObject<IList<UsersResponse>>(json);
         }
 
         public UsersResponse? GetUser(int id)
@@ -130,17 +131,23 @@ namespace Vizsgaremek_Asztali
             return JsonConvert.DeserializeObject<UsersResponse>(json);
         }
 
-        public UsersResponse? UpdateUser(UpdateUserResponse update)
+        public UsersResponse? UpdateMe(UpdateUserResponse update)
         {
             EnsureAuthenticated();
             var body = JsonContent.Create<UpdateUserResponse>(update);
-            var response = _client.PatchAsync("/users/update", body).Result;
+            var response = _client.PatchAsync($"/users/update{update.Id}", body).Result;
+            if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+            {
+                var data = response.Content.ReadAsStringAsync().Result;
+                // TODO: properly formatted error details
+                throw new HttpRequestException($"Failed to update user: {data}");
+            }
             response.EnsureSuccessStatusCode();
             var json = response.Content.ReadAsStringAsync().Result;
             return JsonConvert.DeserializeObject<UsersResponse>(json);
         }
 
-        public UsersResponse? UpdateRoleUser(int id, string roleName)
+        public UsersResponse? UpdateAdminUser(int id, string roleName)
         {
             EnsureAuthenticated();
             var body = JsonContent.Create<UserRoleUpdate>(new UserRoleUpdate(id, roleName));
@@ -168,7 +175,16 @@ namespace Vizsgaremek_Asztali
             return JsonConvert.DeserializeObject<RecipesResponse>(json);
         }
 
-        public RecipesResponse? SearchById(int id)
+        public IList<RecipesResponse>? GetAllRecipes()
+        {
+            EnsureAuthenticated();
+            var response = _client.GetAsync("/recipes/all").Result;
+            response.EnsureSuccessStatusCode();
+            var json = response.Content.ReadAsStringAsync().Result;
+            return JsonConvert.DeserializeObject<IList<RecipesResponse>>(json);
+        }
+
+        public RecipesResponse? SearchRecipe(int id)
         {
             EnsureAuthenticated();
             var response = _client.GetAsync($"/recipes/find{id}").Result;
@@ -247,9 +263,12 @@ namespace Vizsgaremek_Asztali
             if (!IsAuthenticated())
             {
                 Properties.Settings.Default.AuthToken = null;
-                throw new Exception("You are not authenticated!\nPlease log in");
+                throw new UnauthenticatedException();
             }
-            _client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Properties.Settings.Default.AuthToken);
+            if (!_client.DefaultRequestHeaders.Contains("Authorization"))
+            {
+                _client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Properties.Settings.Default.AuthToken);
+            }
         }
 
         private bool IsAuthenticated()
@@ -260,7 +279,7 @@ namespace Vizsgaremek_Asztali
                 try
                 {
                     var jt = new JwtSecurityToken(token);
-                    return jt.ValidTo > DateTime.Now;
+                    return jt.ValidTo > DateTime.UtcNow;
                 }
                 catch (Exception)
                 {
