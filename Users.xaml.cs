@@ -35,23 +35,75 @@ namespace Vizsgaremek_Asztali
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
+            LoadUsers();
+        }
+
+        private void OnView(object sender, RoutedEventArgs e)
+        {
+            if (e.Source is Button source)
+            {
+                var dataitem = source.DataContext as DataItem;
+                var mainWindow = (MainWindow)Application.Current.MainWindow;
+                mainWindow.FrameForPages.Navigate(new Uri($"UserView.xaml?userId={dataitem.Id}", UriKind.Relative));
+            }
+        }
+
+        private void UpdateUser(object sender, RoutedEventArgs e)
+        {
+            if (e.Source is Button source)
+            {
+                var dataitem = source.DataContext as DataItem;
+                var mainWindow = (MainWindow)Application.Current.MainWindow;
+                mainWindow.FrameForPages.Navigate(new Uri($"UpdateUser.xaml?userId={dataitem.Id}", UriKind.Relative));
+            }
+        }
+
+        private void DeleteUser(object sender, RoutedEventArgs e)
+        {
+            if (e.Source is Button source)
+            {
+                var user = source.DataContext as DataItem;
+                if (user != null) 
+                {
+                    var result = MessageBox.Show("Are you sure you want to delete?", "Confirmation", MessageBoxButton.YesNo);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        try
+                        {
+                            App.CurrentApp.APIClient.DeleteUser(user.Id);
+                            var users = UsersDataGrid.ItemsSource;
+                            UsersDataGrid.ItemsSource = users.Cast<DataItem>().Where(u => u.Id != user.Id);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Failed to delete user: " + ex.Message);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void SearchUser(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(Searchbox.Text))
+            {
+                LoadUsers();
+                return;
+            }
             try
             {
-                var users = App.CurrentApp.APIClient.GetAllUsers();
-                if (users == null || users.Count == 0)
+                var users = App.CurrentApp.APIClient.SearchUser(Searchbox.Text);
+                if (users == null)
                 {
                     throw new Exception("something gone wrong!");
                 }
-                else
+                UsersDataGrid.ItemsSource = users.Select(r => new DataItem
                 {
-                    UsersDataGrid.ItemsSource = users.Select(r => new DataItem
-                    {
-                        Id = r.Id,
-                        Username = r.Name,
-                        Email = r.Email,
-                        Role = r.Role
-                    });
-                }
+                    Id = r.Id,
+                    Username = r.Name,
+                    Email = r.Email,
+                    Role = r.Role
+                });
             }
             catch (Exception ex)
             {
@@ -59,24 +111,27 @@ namespace Vizsgaremek_Asztali
             }
         }
 
-        private void ChangeRole(object sender, RoutedEventArgs e)
+        private void LoadUsers()
         {
-
-        }
-
-        private void UpdateUser(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void DeleteUser(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void SearchUser(object sender, RoutedEventArgs e)
-        {
-            
+            try
+            {
+                var users = App.CurrentApp.APIClient.GetAllUsers();
+                if (users == null || users.Count == 0)
+                {
+                    throw new Exception("something gone wrong!");
+                }
+                UsersDataGrid.ItemsSource = users.Select(r => new DataItem
+                {
+                    Id = r.Id,
+                    Username = r.Name,
+                    Email = r.Email,
+                    Role = r.Role
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

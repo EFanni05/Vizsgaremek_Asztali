@@ -31,7 +31,7 @@ namespace Vizsgaremek_Asztali
         {
             public int Id { get; set; }
             public string Posted { get; set; }
-            public int User { get; set; }
+            public string User { get; set; }
             public string Title { get; set; }
             public string Description { get; set; }
         }
@@ -50,8 +50,8 @@ namespace Vizsgaremek_Asztali
                     RecipesDataGrid.ItemsSource = recipes.Select(r => new DataItem
                     {
                         Id = r.Id,
-                        Posted = r.Posted,
-                        User = r.UserId,
+                        Posted = FormatDateTime(r.Posted),
+                        User = r.Username,
                         Title = r.Title,
                         Description = r.Description
                     });
@@ -61,6 +61,11 @@ namespace Vizsgaremek_Asztali
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private string FormatDateTime(string timestamp)
+        {
+            return DateTime.Parse(timestamp).ToString("yyyy-MM-dd HH:mm");
         }
     }
 }

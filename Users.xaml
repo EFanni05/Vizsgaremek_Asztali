@@ -22,7 +22,7 @@
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <Button x:Name="View" Content="Change Role" Click="ChangeRole"/>
+                            <Button x:Name="View" Content="Users Recipes" Click="OnView"/>
                             <Button x:Name="Update" Content="Update" Click="UpdateUser"/>
                             <Button x:Name="Delete" Content="Delete" Click="DeleteUser"/>
                         </StackPanel>

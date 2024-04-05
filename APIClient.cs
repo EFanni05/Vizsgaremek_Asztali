@@ -147,32 +147,37 @@ namespace Vizsgaremek_Asztali
             return JsonConvert.DeserializeObject<UsersResponse>(json);
         }
 
-        public UsersResponse? UpdateAdminUser(int id, string roleName)
+        public UsersResponse? UpdateAdminUser(UpdateUserResponse update)
         {
             EnsureAuthenticated();
-            var body = JsonContent.Create<UserRoleUpdate>(new UserRoleUpdate(id, roleName));
-            var response = _client.PatchAsync($"/users/update:admin{id}", body).Result;
+            var body = JsonContent.Create<UpdateUserResponse>(update);
+            var response = _client.PatchAsync($"/users/update:admin{update.Id}", body).Result;
+            if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+            {
+                var data = response.Content.ReadAsStringAsync().Result;
+                throw new HttpRequestException($"Failed to update user: {data}");
+            }
             response.EnsureSuccessStatusCode();
             var json = response.Content.ReadAsStringAsync().Result;
             return JsonConvert.DeserializeObject<UsersResponse>(json);
         }
 
-        public UsersResponse? SearchUser(string searchString)
+        public IList<UsersResponse>? SearchUser(string searchString)
         {
             EnsureAuthenticated();
             var response = _client.GetAsync($"/users/search{searchString}").Result;
             response.EnsureSuccessStatusCode();
             var json = response.Content.ReadAsStringAsync().Result;
-            return JsonConvert.DeserializeObject<UsersResponse>(json);
+            return JsonConvert.DeserializeObject<IList<UsersResponse>>(json);
         }
 
-        public RecipesResponse? SearchUser(int id)
+        public IList<RecipesResponse>? SearchUser(int id)
         {
             EnsureAuthenticated();
             var response = _client.GetAsync($"/recipes/search-user{id}").Result;
             response.EnsureSuccessStatusCode();
             var json = response.Content.ReadAsStringAsync().Result;
-            return JsonConvert.DeserializeObject<RecipesResponse>(json);
+            return JsonConvert.DeserializeObject<IList<RecipesResponse>>(json);
         }
 
         public IList<RecipesResponse>? GetAllRecipes()
@@ -212,13 +217,13 @@ namespace Vizsgaremek_Asztali
             return JsonConvert.DeserializeObject<RecipesResponse>(json);
         }
 
-        public RatingResponse? GetAllRating()
+        public IList<RatingResponse>? GetAllRating()
         {
             EnsureAuthenticated();
             var response = _client.GetAsync("/ratings/getAll").Result;
             response.EnsureSuccessStatusCode();
             var json = response.Content.ReadAsStringAsync().Result;
-            return JsonConvert.DeserializeObject<RatingResponse>(json);
+            return JsonConvert.DeserializeObject<IList<RatingResponse>>(json);
         }
 
         public RatingResponse? GetRating(int id)

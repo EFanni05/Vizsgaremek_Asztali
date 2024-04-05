@@ -18,6 +18,9 @@ namespace Vizsgaremek_Asztali
         [JsonProperty("posted")]
         public string Posted { get; set; }
 
+        [JsonProperty("username")]
+        public string Username { get; set; }
+
         [JsonProperty("rating")]
         public int Rating { get; set; }
 

@@ -35,7 +35,28 @@ namespace Vizsgaremek_Asztali
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                var rating = App.CurrentApp.APIClient.GetAllRating();
+                if (rating == null || rating.Count == 0)
+                {
+                    throw new Exception("something gone wrong!");
+                }
+                else
+                {
+                    RatingDataGrid.ItemsSource = rating.Select(r => new DataItem
+                    {
+                        Id = r.Id,
+                        Username = r.Username,
+                        Content = r.Content,
+                        Rating = r.Rating,
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
