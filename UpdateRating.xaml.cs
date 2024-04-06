@@ -52,6 +52,7 @@ namespace Vizsgaremek_Asztali
                 };
                 var request = new RatingUpdateResponse()
                 {
+                    Id = id,
                     Content = ContentTextBox.Text,
                     Rating = rating,
                 };
@@ -105,7 +106,7 @@ namespace Vizsgaremek_Asztali
             }
             else
             {
-                MessageBox.Show("Something went wrong!");
+                MessageBox.Show("Something went wrong! Rating");
                 var mainWindow = (MainWindow)Application.Current.MainWindow;
                 mainWindow.FrameForPages.Navigate(new Uri("Ratings.xaml", UriKind.Relative));
             }

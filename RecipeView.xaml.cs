@@ -58,5 +58,11 @@ namespace Vizsgaremek_Asztali
                 mainWindow.FrameForPages.Navigate(new Uri("Recipes.xaml", UriKind.Relative));
             }
         }
+
+        private void OnBackClick(object sender, RoutedEventArgs e)
+        {
+            var mainWindow = (MainWindow)Application.Current.MainWindow;
+            mainWindow.FrameForPages.Navigate(new Uri("Recipes.xaml", UriKind.Relative));
+        }
     }
 }

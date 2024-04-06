@@ -25,9 +25,9 @@
         <TextBox x:Name="TitleTextBox" Grid.Column="1" HorizontalAlignment="Center" Height="33" TextWrapping="Wrap" VerticalAlignment="Center" Width="334"/>
         <Label Content="Preparation time" VerticalAlignment="Top" Height="26" Width="176" Foreground="White" RenderTransformOrigin="0.053,0.314" Margin="42,17,42,0" Grid.Row="1"/>
         <TextBox x:Name="PreptimeTextBox" Grid.Column="1" HorizontalAlignment="Center" Height="33" TextWrapping="Wrap" VerticalAlignment="Center" Width="334" Grid.Row="1"/>
-        <TextBox x:Name="DescriptionTextBox" Grid.Column="1" HorizontalAlignment="Center" Height="113" Grid.Row="2" VerticalAlignment="Center" Width="519"/>
+        <TextBox x:Name="DescriptionTextBox" Grid.Column="1" HorizontalAlignment="Center" Height="113" Grid.Row="2" VerticalAlignment="Center" Width="519" TextWrapping="Wrap"/>
         <Label Content="Content" VerticalAlignment="Top" Height="26" Width="176" Foreground="White" RenderTransformOrigin="0.053,0.314" Margin="42,48,42,0" Grid.Row="3"/>
-        <TextBox x:Name="ContentTextBox" Grid.Column="1" HorizontalAlignment="Center" Height="112" Grid.Row="3" VerticalAlignment="Center" Width="519"/>
+        <TextBox x:Name="ContentTextBox" Grid.Column="1" HorizontalAlignment="Center" Height="112" Grid.Row="3" VerticalAlignment="Center" Width="519" TextWrapping="Wrap"/>
         <Label Content="Description" VerticalAlignment="Center" Height="26" Width="176" Foreground="White" RenderTransformOrigin="0.053,0.314" Margin="10,0,10,0" Grid.Row="2"/>
         <Button x:Name="CancelButton" Grid.Column="1" Content="Cancel" HorizontalAlignment="Left" Height="38" Margin="249,0,0,0" Grid.Row="5" VerticalAlignment="Center" Width="96" Click="OnCancel"/>
     </Grid>

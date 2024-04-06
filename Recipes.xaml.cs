@@ -90,7 +90,7 @@ namespace Vizsgaremek_Asztali
                     {
                         try
                         {
-                            App.CurrentApp.APIClient.DeleteUser(recipe.Id);
+                            App.CurrentApp.APIClient.DeleteRecipe(recipe.Id);
                             var users = RecipesDataGrid.ItemsSource;
                             RecipesDataGrid.ItemsSource = users.Cast<DataItem>().Where(u => u.Id != recipe.Id);
                         }

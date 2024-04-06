@@ -52,7 +52,11 @@ namespace Vizsgaremek_Asztali
                     request.Preptime = prep;
                     App.CurrentApp.APIClient.UpdateRecipe(request);
                     var mainWindow = (MainWindow)Application.Current.MainWindow;
-                    mainWindow.FrameForPages.Navigate(new Uri("Users.xaml", UriKind.Relative));
+                    mainWindow.FrameForPages.Navigate(new Uri("Recipes.xaml", UriKind.Relative));
+                }
+                else
+                {
+                    throw new Exception("Preparation time isn't a number");
                 }
             }
             catch (HttpRequestException ex)

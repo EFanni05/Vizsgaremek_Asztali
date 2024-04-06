@@ -215,7 +215,7 @@ namespace Vizsgaremek_Asztali
         public RecipesResponse? DeleteRecipe(int id)
         {
             EnsureAuthenticated();
-            var response = _client.DeleteAsync($"/recipes/delete-admin{id}").Result;
+            var response = _client.DeleteAsync($"/recipes/delete-admin/{id}").Result;
             response.EnsureSuccessStatusCode();
             var json = response.Content.ReadAsStringAsync().Result;
             return JsonConvert.DeserializeObject<RecipesResponse>(json);
@@ -252,7 +252,7 @@ namespace Vizsgaremek_Asztali
         public RatingResponse? DeleteRating(int id)
         {
             EnsureAuthenticated();
-            var response = _client.DeleteAsync($"/ratings/deleteadmin{id}").Result;
+            var response = _client.DeleteAsync($"/ratings/delete-admin/{id}").Result;
             response.EnsureSuccessStatusCode();
             var json = response.Content.ReadAsStringAsync().Result;
             return JsonConvert.DeserializeObject<RatingResponse>(json);
