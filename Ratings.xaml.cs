@@ -31,6 +31,7 @@ namespace Vizsgaremek_Asztali
             public string Username { get; set; }
             public int Rating { get; set; }
             public string Content { get; set; }
+            public string Posted {  get; set; }
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
@@ -50,12 +51,48 @@ namespace Vizsgaremek_Asztali
                         Username = r.Username,
                         Content = r.Content,
                         Rating = r.Rating,
+                        Posted = DateTime.Parse(r.Posted).ToString("yyyy-MM-dd HH:mm")
                     });
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void OnUpdateClick(object sender, RoutedEventArgs e)
+        {
+            if (e.Source is Button source)
+            {
+                var dataitem = source.DataContext as DataItem;
+                var mainWindow = (MainWindow)Application.Current.MainWindow;
+                mainWindow.FrameForPages.Navigate(new Uri($"UpdateRating.xaml?userId={dataitem.Id}", UriKind.Relative));
+            }
+        }
+
+        private void OnDeleteClick(object sender, RoutedEventArgs e)
+        {
+            if (e.Source is Button source)
+            {
+                var rating = source.DataContext as DataItem;
+                if (rating != null)
+                {
+                    var result = MessageBox.Show("Are you sure you want to delete?", "Confirmation", MessageBoxButton.YesNo);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        try
+                        {
+                            App.CurrentApp.APIClient.DeleteRating(rating.Id);
+                            var deleteRating = RatingDataGrid.ItemsSource;
+                            RatingDataGrid.ItemsSource = deleteRating.Cast<DataItem>().Where(u => u.Id != rating.Id);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Failed to delete recipe: " + ex.Message);
+                        }
+                    }
+                }
             }
         }
     }

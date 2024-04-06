@@ -67,5 +67,50 @@ namespace Vizsgaremek_Asztali
         {
             return DateTime.Parse(timestamp).ToString("yyyy-MM-dd HH:mm");
         }
+
+        private void OnViewClick(object sender, RoutedEventArgs e)
+        {
+            if (e.Source is Button source)
+            {
+                var dataitem = source.DataContext as DataItem;
+                var mainWindow = (MainWindow)Application.Current.MainWindow;
+                mainWindow.FrameForPages.Navigate(new Uri($"RecipeView.xaml?userId={dataitem.Id}", UriKind.Relative));
+            }
+        }
+
+        private void OnDeleteClick(object sender, RoutedEventArgs e)
+        {
+            if (e.Source is Button source)
+            {
+                var recipe = source.DataContext as DataItem;
+                if (recipe != null)
+                {
+                    var result = MessageBox.Show("Are you sure you want to delete?", "Confirmation", MessageBoxButton.YesNo);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        try
+                        {
+                            App.CurrentApp.APIClient.DeleteUser(recipe.Id);
+                            var users = RecipesDataGrid.ItemsSource;
+                            RecipesDataGrid.ItemsSource = users.Cast<DataItem>().Where(u => u.Id != recipe.Id);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Failed to delete recipe: " + ex.Message);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void OnUpdateClick(object sender, RoutedEventArgs e)
+        {
+            if (e.Source is Button source)
+            {
+                var dataitem = source.DataContext as DataItem;
+                var mainWindow = (MainWindow)Application.Current.MainWindow;
+                mainWindow.FrameForPages.Navigate(new Uri($"RecipeUpdate.xaml?userId={dataitem.Id}", UriKind.Relative));
+            }
+        }
     }
 }

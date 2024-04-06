@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Vizsgaremek_Asztali
 {
-    public class UpdateRating
+    public class RatingUpdateResponse
     {
         [JsonProperty("id")]
         public int Id { get; set; }

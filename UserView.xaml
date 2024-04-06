@@ -9,7 +9,7 @@
       Title="UserView" Loaded="OnLoaded">
 
     <Grid Height="414" Width="602">
-        <DataGrid x:Name="UsersDataGrid" HorizontalAlignment="Center" Height="337" Margin="0,67,0,0" VerticalAlignment="Top" Width="582" Background="{x:Null}" AutoGenerateColumns="False">
+        <DataGrid x:Name="UsersDataGrid" HorizontalAlignment="Center" Height="357" Margin="0,47,0,0" VerticalAlignment="Top" Width="582" Background="{x:Null}" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" Visibility="Hidden"/>
                 <DataGridTextColumn Header="Posted" Binding="{Binding Posted}"/>
@@ -22,7 +22,8 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-            </DataGrid.Columns> 
+            </DataGrid.Columns>
         </DataGrid>
+        <Button x:Name="BackButton" Content="Back" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="100" Height="32" Click="OnBackButtonClick"/>
     </Grid>
 </Page>

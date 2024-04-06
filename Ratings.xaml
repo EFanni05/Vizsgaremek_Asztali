@@ -9,20 +9,25 @@
       Title="Ratings">
 
     <Grid Width="602" Height="414" Loaded="OnLoaded">
-        <DataGrid x:Name="RatingDataGrid" HorizontalAlignment="Center" Height="394" VerticalAlignment="Center" Width="582" Background="{x:Null}">
+        <DataGrid x:Name="RatingDataGrid" HorizontalAlignment="Center" Height="394" VerticalAlignment="Center" Width="582" Background="{x:Null}" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" Visibility="Hidden"/>
                 <DataGridTextColumn Header="Posted" Binding="{Binding Posted}"/>
-                <DataGridTextColumn Header="User" Binding="{Binding User}"/>
+                <DataGridTextColumn Header="User" Binding="{Binding Username}"/>
                 <DataGridTextColumn Header="Rating" Binding="{Binding Rating}"/>
-                <DataGridTextColumn Header="Content" Binding="{Binding Content}"/>
+                <DataGridTextColumn Header="Content" Binding="{Binding Content}" MaxWidth="450">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
                 <DataGridTemplateColumn Header="Moderating">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <Button x:Name="View" Content="View the full Rating"/>
-                                <Button x:Name="Update" Content="Update"/>
-                                <Button x:Name="Delete" Content="Delete"/>
+                                <Button x:Name="Update" Content="Update" Click="OnUpdateClick"/>
+                                <Button x:Name="Delete" Content="Delete" Click="OnDeleteClick"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

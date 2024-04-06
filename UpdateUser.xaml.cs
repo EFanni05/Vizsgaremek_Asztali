@@ -62,7 +62,25 @@ namespace Vizsgaremek_Asztali
                 {
                     UsernameTextBox.Text = user.Name;
                     EmailTextBox.Text = user.Email;
+                    string role = user.Role switch 
+                    {
+                        "user" => "User",
+                        "admin" => "Admin",
+                        "manager" => "Manager",
+                        _ => "User"
+                    };
+                    var item = RoleDropDown.Items
+                        .Cast<ComboBoxItem>()
+                        .Where(x => x.Name == role)
+                        .Single();
+                    RoleDropDown.SelectedValue = item;
                 }
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show(ex.Message );
+                var mainWindow = (MainWindow)Application.Current.MainWindow;
+                mainWindow.FrameForPages.Navigate(new Uri("Users.xaml", UriKind.Relative));
             }
             catch (Exception ex)
             {
@@ -76,20 +94,25 @@ namespace Vizsgaremek_Asztali
         {
             try
             {
+                var roleItem = RoleDropDown.SelectedItem as ComboBoxItem;
+                string role = (roleItem == null ? "User" : roleItem.Name) switch
+                {
+                    "User" => "user",
+                    "Admin" => "admin",
+                    "Manager" => "manager",
+                    _ => "user",
+                };
                 var request = new UpdateUserResponse()
                 {
                     Email = EmailTextBox.Text,
                     Id = id,
                     Name = UsernameTextBox.Text,
+                    Role = role
                 };
                 if (!string.IsNullOrEmpty(NewPasswordTextBox.Password))
                 {
                     request.Password = NewPasswordTextBox.Password;
                     request.PasswordAgain = NewPasswordAgainTextBox.Password;
-                }
-                if(RoleDropDown.SelectedItem != null)
-                {
-                    request.Role = RoleDropDown.SelectedItem.ToString();
                 }
                 App.CurrentApp.APIClient.UpdateAdminUser(request);
                 var mainWindow = (MainWindow)Application.Current.MainWindow;
