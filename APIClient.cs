@@ -64,6 +64,9 @@ namespace Vizsgaremek_Asztali
         {
             [JsonProperty("token")]
             public string? AuthToken { get; set; }
+
+            [JsonProperty("user_id")]
+            public int UserId { get; set; }
         }
 
         private static HttpClient _client = new HttpClient();
@@ -88,6 +91,7 @@ namespace Vizsgaremek_Asztali
                 throw new ApplicationException("API error (invalid response or token is received)");
             }
             Properties.Settings.Default.AuthToken = result.AuthToken;
+            Properties.Settings.Default.CurrentUserId = result.UserId;
         }
 
         public void LogOut()
@@ -151,8 +155,8 @@ namespace Vizsgaremek_Asztali
         {
             EnsureAuthenticated();
             var body = JsonContent.Create<UpdateUserResponse>(update);
-            var response = _client.PatchAsync($"/users/update:admin{update.Id}", body).Result;
-            if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+            var response = _client.PatchAsync($"/users/update-admin/{Properties.Settings.Default.CurrentUserId}", body).Result;
+            if (response.StatusCode == System.Net.HttpStatusCode.Forbidden)
             {
                 var data = response.Content.ReadAsStringAsync().Result;
                 throw new HttpRequestException($"Failed to update user: {data}");
@@ -198,10 +202,10 @@ namespace Vizsgaremek_Asztali
             return JsonConvert.DeserializeObject<RecipesResponse>(json);
         }
 
-        public RecipesResponse? UpdateRecipe(Updaterecipes update)
+        public RecipesResponse? UpdateRecipe(UpdateRecipes update)
         {
             EnsureAuthenticated();
-            var body = JsonContent.Create<Updaterecipes>(update);
+            var body = JsonContent.Create<UpdateRecipes>(update);
             var response = _client.PatchAsync($"/recipes/update{update.Id}", body).Result;
             response.EnsureSuccessStatusCode();
             var json = response.Content.ReadAsStringAsync().Result;
@@ -235,10 +239,10 @@ namespace Vizsgaremek_Asztali
             return JsonConvert.DeserializeObject<RatingResponse>(json);
         }
 
-        public RatingResponse? UpdateRating(UpdateRating update)
+        public RatingResponse? UpdateRating(RatingUpdateResponse update)
         {
             EnsureAuthenticated();
-            var body = JsonContent.Create<UpdateRating>(update);
+            var body = JsonContent.Create<RatingUpdateResponse>(update);
             var response = _client.PatchAsync($"/ratings/updateAdmin{update.Id}", body).Result;
             response.EnsureSuccessStatusCode();
             var json = response.Content.ReadAsStringAsync().Result;

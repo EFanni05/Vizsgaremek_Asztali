@@ -26,9 +26,9 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <Button x:Name="View" Content="View the full recipes"/>
-                                <Button x:Name="Update" Content="Update"/>
-                                <Button x:Name="Delete" Content="Delete"/>
+                                <Button x:Name="View" Content="View the full recipes" Click="OnViewClick"/>
+                                <Button x:Name="Update" Content="Update" Click="OnUpdateClick"/>
+                                <Button x:Name="Delete" Content="Delete" Click="OnDeleteClick"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

@@ -82,5 +82,11 @@ namespace Vizsgaremek_Asztali
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void OnBackButtonClick(object sender, RoutedEventArgs e)
+        {
+            var mainWindow = (MainWindow)Application.Current.MainWindow;
+            mainWindow.FrameForPages.Navigate(new Uri("Users.xaml", UriKind.Relative));
+        }
     }
 }
