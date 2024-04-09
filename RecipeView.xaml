@@ -27,15 +27,16 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Label x:Name="UsernameLabel" Content="Username" HorizontalAlignment="Center" Height="34" VerticalAlignment="Center" Width="281" Foreground="White" FontSize="16" FontWeight="Bold"/>
-            <Label Content="Preparation time:" HorizontalAlignment="Left" Height="28" Margin="10,6,0,0" VerticalAlignment="Top" Width="121" Foreground="#FFFAFAFA" Grid.Row="1" FontSize="14"/>
+            <Label Content="Preparation time:" HorizontalAlignment="Left" Height="28" Margin="20,0,0,0" VerticalAlignment="Center" Width="121" Foreground="#FFFAFAFA" Grid.Row="1" FontSize="14" Grid.Column="1"/>
             <Label x:Name="Posted" Grid.Column="1" Content="Posted" HorizontalAlignment="Left" Height="34" Margin="10,7,0,0" VerticalAlignment="Top" Width="175" Foreground="White" FontWeight="Bold" FontSize="14"/>
-            <Label x:Name="PrepTimeLabel" Content="time" HorizontalAlignment="Left" Height="26" Margin="136,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="155" Foreground="White"/>
+            <Label x:Name="PrepTimeLabel" Content="time" HorizontalAlignment="Left" Height="26" Margin="146,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="155" Foreground="White" Grid.Column="1"/>
             <Button Grid.Column="1" Content="Back" HorizontalAlignment="Left" Height="34" Margin="190,0,0,0" VerticalAlignment="Center" Width="101" Click="OnBackClick"/>
+            <Label x:Name="TitleLabel" Content="Title" HorizontalAlignment="Center" Height="34" VerticalAlignment="Top" Width="281" Foreground="White" FontSize="16" FontWeight="Bold" Margin="0,6,0,0" Grid.Row="1"/>
         </Grid>
         <ScrollViewer HorizontalAlignment="Center" Height="243" Grid.Row="2" VerticalAlignment="Center" Width="582">
             <TextBlock x:Name="ContentRecipes" Height="221" TextWrapping="Wrap" Text="TextBlock" Width="540" Cursor="Arrow" Foreground="White"/>
         </ScrollViewer>
-        <TextBlock x:Name="DescriptionTextBlock" HorizontalAlignment="Center" Height="44" Grid.Row="1" TextWrapping="Wrap" Text="Description" VerticalAlignment="Center" Width="582" FontStyle="Italic" Foreground="White"/>
+        <TextBlock x:Name="DescriptionTextBlock" HorizontalAlignment="Center" Height="64" Grid.Row="1" TextWrapping="Wrap" Text="Description" VerticalAlignment="Center" Width="582" FontStyle="Italic" Foreground="White"/>
 
     </Grid>
 </Page>

@@ -4,33 +4,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace Vizsgaremek_Asztali
 {
     public class RecipesResponse
     {
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [JsonProperty("title")]
+        [JsonPropertyName("title")]
         public string Title { get; set; }
 
-        [JsonProperty("description")]
+        [JsonPropertyName("description")]
         public string Description { get; set; }
 
-        [JsonProperty("content")]
+        [JsonPropertyName("content")]
         public string Content { get; set; }
 
-        [JsonProperty("pretime")]
+        [JsonPropertyName("preptime")]
         public int Preptime { get; set; }
 
-        [JsonProperty("posted")]
+        [JsonPropertyName("posted")]
         public string Posted {  get; set; }
 
-        [JsonProperty("user_id")]
+        [JsonPropertyName("user_id")]
         public int UserId { get; set; }
 
-        [JsonProperty("username")]
+        [JsonPropertyName("username")]
         public string Username { get; set; }
     }
 }

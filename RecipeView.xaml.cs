@@ -35,20 +35,30 @@ namespace Vizsgaremek_Asztali
             string s = parameters.Get("userId") ?? "";
             if (int.TryParse(s, out int userid))
             {
-                var recipe = App.CurrentApp.APIClient.SearchRecipe(userid);
-                if (recipe == null)
+                try
                 {
-                    MessageBox.Show("Something went wrong!");
+                    var recipe = App.CurrentApp.APIClient.SearchRecipe(userid);
+                    if (recipe == null)
+                    {
+                        MessageBox.Show("Something went wrong!");
+                        var mainWindow = (MainWindow)Application.Current.MainWindow;
+                        mainWindow.FrameForPages.Navigate(new Uri("Recipes.xaml", UriKind.Relative));
+                    }
+                    else
+                    {
+                        UsernameLabel.Content = recipe.Username;
+                        TitleLabel.Content = recipe.Title;
+                        Posted.Content = DateTime.Parse(recipe.Posted).ToString("yyyy-MM-dd HH:mm");
+                        PrepTimeLabel.Content = recipe.Preptime.ToString() + " minutes";
+                        DescriptionTextBlock.Text = recipe.Description;
+                        ContentRecipes.Text = recipe.Content;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something went wrong! " + ex.Message);
                     var mainWindow = (MainWindow)Application.Current.MainWindow;
                     mainWindow.FrameForPages.Navigate(new Uri("Recipes.xaml", UriKind.Relative));
-                }
-                else
-                {
-                    UsernameLabel.Content = recipe.Username;
-                    Posted.Content = DateTime.Parse(recipe.Posted).ToString("yyyy-MM-dd HH:mm");
-                    PrepTimeLabel.Content = recipe.Preptime.ToString() + " minutes";
-                    DescriptionTextBlock.Text = recipe.Description;
-                    ContentRecipes.Text = recipe.Content;
                 }
             }
             else
