@@ -31,9 +31,6 @@ namespace Vizsgaremek_Asztali
         public Login()
         {
             InitializeComponent();
-            //TODO:remove this!!
-            Email_login.Text = "manager@example.com";
-            Password_Login.Password = "Admin123";
         }
 
         private void LoginAdmin(object sender, RoutedEventArgs e)
